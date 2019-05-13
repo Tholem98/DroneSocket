@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drone SocketIo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="pr-4 text-center">  
+        <h1 class="jumbotron text-center">Controla tu drone desde aqui</h1>
+        <button class="btn btn-success mt-4 mr-4" id="takeoff">TAKEOFF</button>
+        <button class="btn btn-danger mt-4 mr-4" id="stop">STOP</button>
+        <button class="btn btn-primary mt-4 mr-4" id="land">LAND</button>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    let socket=io()
+    function takeoff(){
+        console.log('takeOff')
+        socket.emit('takeoff')
+    }
+    function land(){
+        console.log('Land')
+        socket.emit('land')
+    }
+    function stop(){
+        console.log('stop')
+        socket.emit('stop')
+    }
+    document.getElementById('takeoff').
+    onclick = takeoff
+    document.getElementById('land').
+    onclick= land
+    document.getElementById('stop').
+    onclick= stop
+    </script>
+
+</body>
+</html>
