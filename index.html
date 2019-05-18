@@ -6,13 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Drone SocketIo</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body>
     <div class="pr-4 text-center">  
         <h1 class="jumbotron text-center">Controla tu drone desde aqui</h1>
-        <button class="btn btn-success mt-4 mr-4" id="takeoff">TAKEOFF</button>
-        <button class="btn btn-danger mt-4 mr-4" id="stop">STOP</button>
-        <button class="btn btn-primary mt-4 mr-4" id="land">LAND</button>
+        <div class="row d-flex justify-content-center">
+            <button class="btn btn-success mt-4 mr-4" id="takeoff">TAKEOFF</button>
+            <button class="btn btn-danger mt-4 mr-4" id="stop">STOP</button>
+            <button class="btn btn-primary mt-4 mr-4" id="land">LAND</button>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <button class="btn btn-light border-secondaryexit mt-4 mr-4" id="front"> <span class="fa fa-arrow-up"></span> </button>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <button class="btn btn-light border-secondaryexit mt-4 mr-4" id="left"><span class="fa fa-arrow-left"></span></button>
+            <button class="btn btn-light border-secondaryexit mt-4 mr-4" id="back"><span class="fa fa-arrow-down"></span></button>
+            <button class="btn btn-light border-secondaryexit mt-4 mr-4" id="right"><span class="fa fa-arrow-right"></span></button>
+        </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -29,12 +40,31 @@
         console.log('stop')
         socket.emit('stop')
     }
-    document.getElementById('takeoff').
-    onclick = takeoff
-    document.getElementById('land').
-    onclick= land
-    document.getElementById('stop').
-    onclick= stop
+    function front(){
+        console.log('front')
+        socket.emit('front')
+    }
+    function back(){
+        console.log('back')
+        socket.emit('back')
+    }
+    function right(){
+        console.log('right')
+        socket.emit('right')
+    }
+    function left(){
+        console.log('left')
+        socket.emit('left')
+    }
+    
+
+    document.getElementById('front').onclick= front
+    document.getElementById('back').onclick= back
+    document.getElementById('right').onclick= right
+    document.getElementById('left').onclick= left
+    document.getElementById('takeoff').onclick = takeoff
+    document.getElementById('land').onclick= land
+    document.getElementById('stop').onclick= stop
     </script>
 
 </body>
