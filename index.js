@@ -35,18 +35,18 @@ io.on('connection',(socket)=>{
     })
     socket.on('front',()=>{
         console.log(listen,'front')
-        
+        client.front(15)
     })
     socket.on('back',()=>{
         console.log(listen,'back')
-        
+        client.back(15)
     })
     socket.on('right',()=>{
         console.log(listen,'right')
-        
+        client.right(15)
     })
     socket.on('left',()=>{
         console.log(listen,'left')
-        
+        client.left(15)
     })
 })
