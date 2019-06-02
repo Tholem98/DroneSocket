@@ -30,6 +30,7 @@
     <script>
         
         window.addEventListener("keydown", function (event) {
+            
   switch (event.key) {
     case "Down": // IE/Edge specific value
     case "ArrowDown":
@@ -52,7 +53,7 @@
       break;
     case "Esc": // IE/Edge specific value
     case "Escape":
-    console.log(event.key)
+    
     socket.emit('land')
       break;
     default:
@@ -61,7 +62,8 @@
         })
 
 window.addEventListener("keyup", (event)=>{
-    if(event.key!=("Escape"||"Enter")){
+    let includeKeys=["Escape","Enter"]
+    if(!includeKeys.includes(event.key)){
     socket.emit('stop')
     }
 })
