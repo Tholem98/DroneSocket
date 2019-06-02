@@ -25,12 +25,12 @@
             <button class="btn btn-light border-secondaryexit mt-4 mr-4" id="right"><span class="fa fa-arrow-right"></span></button>
         </div>
     </div>
-    <!--<input onkeydown="onKeyDown(event);"onkeyup="onKeyUp(event)"/>-->
+    
     <script src="/socket.io/socket.io.js"></script>
     <script>
         
         window.addEventListener("keydown", function (event) {
-            
+    let land=true
   switch (event.key) {
     case "Down": // IE/Edge specific value
     case "ArrowDown":
@@ -49,7 +49,12 @@
     socket.emit('right')
       break;
     case "Enter":
+        if(land){
     socket.emit('takeoff')
+    land=false
+}else{
+    socket.emit('land')
+}
       break;
     case "Esc": // IE/Edge specific value
     case "Escape":
