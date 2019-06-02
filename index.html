@@ -29,8 +29,8 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         
+        let onland=true
         window.addEventListener("keydown", function (event) {
-    let land=true
   switch (event.key) {
     case "Down": // IE/Edge specific value
     case "ArrowDown":
@@ -49,11 +49,13 @@
     socket.emit('right')
       break;
     case "Enter":
-        if(land){
+        if(onland){
+            
     socket.emit('takeoff')
-    land=false
+    onland=false
 }else{
     socket.emit('land')
+    onland=true
 }
       break;
     case "Esc": // IE/Edge specific value
