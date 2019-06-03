@@ -48,6 +48,12 @@
     case "ArrowRight":
     socket.emit('right')
       break;
+    case "q":
+    socket.emit('clockwise')
+    break
+    case "e":
+    socket.emit('counter-clockwise')
+    break
     case "Enter":
         if(onland){
             

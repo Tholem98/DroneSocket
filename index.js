@@ -49,4 +49,12 @@ io.on('connection',(socket)=>{
         console.log(listen,'left')
         client.left(15)
     })
+    socket.on('clockwise',()=>{
+        console.log('clockwise')
+        client.clockwise(0.5)
+    })
+    socket.on('counter-clockwise',()=>{
+        console.log('counterClockwise')
+        client.counterClockwise(0.5)
+    })
 })
