@@ -5,7 +5,6 @@ const express = require('express')
 const app = express()
 const socketio= require('socket.io')
 
-const listen='listen the'
 
 app.set('port',process.env.PORT||3000)
 app.use(express.static(__dirname))
@@ -18,6 +17,16 @@ const server = app.listen(app.get('port'),()=>{
 })
 
 const io=socketio(server)
+const listen='listen the'
+
+//DOING
+let front = true
+let back = true
+let right = true
+let left = true
+let clockwise = true
+let counterClockwise= true
+//
 
 io.on('connection',(socket)=>{
     console.log('listen')
@@ -28,33 +37,78 @@ io.on('connection',(socket)=>{
     socket.on('land',()=>{
         console.log(listen,'land')
         client.land()
+        land=false
     })
     socket.on('stop',()=>{
         console.log(listen,'stop')
         client.stop()
+    
     })
     socket.on('front',()=>{
+        if(front){
         console.log(listen,'front')
         client.front(15)
+        front=false
+    }else{
+    client.stop()
+    console.log(listen,'stop')
+    front=true
+    }
     })
     socket.on('back',()=>{
+        if(back){
         console.log(listen,'back')
         client.back(15)
+        back=false
+    }else{
+    client.stop()
+    console.log(listen,'stop')
+    back=true
+    }
     })
     socket.on('right',()=>{
+        if(right){
         console.log(listen,'right')
         client.right(15)
+        right=false
+    }else{
+    client.stop()
+    console.log(listen,'stop')
+    right=true
+    }
     })
     socket.on('left',()=>{
+        if(left){
         console.log(listen,'left')
         client.left(15)
+        left=false
+    }else{
+    client.stop()
+    console.log(listen,'stop')
+    left=true
+    }
     })
     socket.on('clockwise',()=>{
-        console.log('clockwise')
+        if(clockwise){
+            console.log(clockwise)
+        console.log(listen,'clockwise')
         client.clockwise(0.5)
+        clockwise=false
+    }else{
+    client.stop()
+    console.log(listen,'stop')
+    clockwise=true
+    }
     })
-    socket.on('counter-clockwise',()=>{
-        console.log('counterClockwise')
+    socket.on('counterClockwise',()=>{
+        if(counterClockwise){
+        console.log(listen,'counterClockwise')
         client.counterClockwise(0.5)
+        counterClockwise=false
+    }else{
+        client.stop()
+        console.log(listen,'stop')
+        counterClockwise=true
+    }
     })
 })

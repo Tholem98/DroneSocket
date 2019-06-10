@@ -17,12 +17,14 @@
             <button class="btn btn-primary mt-4 mr-4" id="land">LAND</button>
         </div>
         <div class="row d-flex justify-content-center">
-            <button class="btn btn-light border-secondaryexit mt-4 mr-4" id="front"> <span class="fa fa-arrow-up"></span> </button>
+                <button class="btn btn-light rounded-circle mt-4 mr-4" id="counterClockwise"> <span class="fas fa-undo"></span> </button>
+                <button class="btn btn-light mt-4 mr-4" id="front"> <span class="fa fa-arrow-up"></span> </button>
+                <button class="btn btn-light rounded-circle mt-4 mr-4" id="clockwise"> <span class="fas fa-redo"></span> </button>
         </div>
         <div class="row d-flex justify-content-center">
-            <button class="btn btn-light border-secondaryexit mt-4 mr-4" id="left"><span class="fa fa-arrow-left"></span></button>
-            <button class="btn btn-light border-secondaryexit mt-4 mr-4" id="back"><span class="fa fa-arrow-down"></span></button>
-            <button class="btn btn-light border-secondaryexit mt-4 mr-4" id="right"><span class="fa fa-arrow-right"></span></button>
+            <button class="btn btn-light mt-4 mr-4" id="left"><span class="fa fa-arrow-left"></span></button>
+            <button class="btn btn-light mt-4 mr-4" id="back"><span class="fa fa-arrow-down"></span></button>
+            <button class="btn btn-light mt-4 mr-4" id="right"><span class="fa fa-arrow-right"></span></button>
         </div>
     </div>
     
@@ -52,7 +54,7 @@
     socket.emit('clockwise')
     break
     case "e":
-    socket.emit('counter-clockwise')
+    socket.emit('counterClockwise')
     break
     case "Enter":
         if(onland){
@@ -81,35 +83,38 @@ window.addEventListener("keyup", (event)=>{
     }
 })
 
+function todo(action){
+    console.log(action)
+    socket.emit(action)
+}
 
     let socket=io()
     function takeoff(){
-        console.log('takeOff')
-        socket.emit('takeoff')
+        todo('takeoff')
     }
     function land(){
-        console.log('Land')
-        socket.emit('land')
+        todo('land')
     }
     function stop(){
-        console.log('stop')
-        socket.emit('stop')
+        todo('stop')
     }
     function front(){
-        console.log('front')
-        socket.emit('front')
+        todo('front')
     }
     function back(){
-        console.log('back')
-        socket.emit('back')
+        todo('back')
     }
     function right(){
-        console.log('right')
-        socket.emit('right')
+        todo('right')
     }
     function left(){
-        console.log('left')
-        socket.emit('left')
+        todo('left')
+    }
+    function clockwise(){
+        todo('clockwise')
+    }
+    function counterClockwise(){
+        todo('counterClockwise')
     }
     
 
@@ -120,6 +125,8 @@ window.addEventListener("keyup", (event)=>{
     document.getElementById('takeoff').onclick = takeoff
     document.getElementById('land').onclick= land
     document.getElementById('stop').onclick= stop
+    document.getElementById('clockwise').onclick= clockwise
+    document.getElementById('counterClockwise').onclick= counterClockwise
     </script>
 
 </body>
