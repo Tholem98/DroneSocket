@@ -12,6 +12,9 @@ app.use(express.static(__dirname))
 app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname,'index.html'))
 })
+app.get('/canvas',(req,res)=>{
+    res.sendFile(path.join(__dirname,'canvas.html'))
+})
 const server = app.listen(app.get('port'),()=>{
     console.log('Server on port',app.get('port'))
 })

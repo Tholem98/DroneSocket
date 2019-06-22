@@ -26,9 +26,50 @@
             <button class="btn btn-light mt-4 mr-4" id="back"><span class="fa fa-arrow-down"></span></button>
             <button class="btn btn-light mt-4 mr-4" id="right"><span class="fa fa-arrow-right"></span></button>
         </div>
+
+        <canvas width="500" height="500" style="border: black solid 1px;
+          left:50px; top: 70px" id="myCanvas" >
+
+        </canvas>
+
     </div>
     
     <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+    const canvas = document.getElementById('myCanvas')
+    const ctx = canvas.getContext("2d")
+    
+    
+    
+    
+
+    canvas.addEventListener('mousemove',(e)=>{
+        function getMousePos(canvas,e){
+        return{
+            x: e.clientX,
+            y: e.clientY
+        }
+    }
+        circle = canvas.getContext("2d")
+        circle.fillStylle = "rgba(163,208,244,0.5)"
+        let mousePos = getMousePos(canvas,e)
+        mousePos.x-=240
+        mousePos.y-=60
+        console.log(mousePos)
+        circle.clearRect(0,0,500,500)
+        circle.beginPath()
+        circle.arc(mousePos.x,mousePos.y,20,0,Math.PI*2)
+        circle.fill()
+            if(mousePos.x>250){
+                socket.emit('right')
+            }
+    })
+    
+    
+
+    </script>
+
     <script>
         
         let onland=true
