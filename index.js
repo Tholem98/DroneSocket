@@ -48,70 +48,68 @@ io.on('connection',(socket)=>{
     
     })
     socket.on('front',()=>{
-        if(front){
+        //if(front){
         console.log(listen,'front')
         client.front(15)
         front=false
-    }else{
-    client.stop()
-    console.log(listen,'stop')
-    front=true
-    }
+    // }else{
+    // client.stop()
+    // console.log(listen,'stop')
+    // front=true
+    // }
     })
     socket.on('back',()=>{
-        if(back){
+       // if(back){
         console.log(listen,'back')
         client.back(15)
         back=false
-    }else{
-    client.stop()
-    console.log(listen,'stop')
-    back=true
-    }
+    // }else{
+    // client.stop()
+    // console.log(listen,'stop')
+    // back=true
+    // }
     })
     socket.on('right',()=>{
-        if(right){
         console.log(listen,'right')
         client.right(15)
         right=false
-    }else{
-    client.stop()
-    console.log(listen,'stop')
-    right=true
-    }
+    // }else{
+    // client.stop()
+    // console.log(listen,'stop')
+    // right=true
+    // }
     })
     socket.on('left',()=>{
-        if(left){
+        // if(left){
         console.log(listen,'left')
         client.left(15)
         left=false
-    }else{
-    client.stop()
-    console.log(listen,'stop')
-    left=true
-    }
+    // }else{
+    // client.stop()
+    // console.log(listen,'stop')
+    // left=true
+    // }
     })
     socket.on('clockwise',()=>{
-        if(clockwise){
-            console.log(clockwise)
+        // if(clockwise){
         console.log(listen,'clockwise')
         client.clockwise(0.5)
         clockwise=false
-    }else{
-    client.stop()
-    console.log(listen,'stop')
-    clockwise=true
-    }
+    // }else{
+    // client.stop()
+    // console.log(listen,'stop')
+    // clockwise=true
+    // }
     })
     socket.on('counterClockwise',()=>{
-        if(counterClockwise){
+        // if(counterClockwise){
         console.log(listen,'counterClockwise')
         client.counterClockwise(0.5)
         counterClockwise=false
-    }else{
-        client.stop()
-        console.log(listen,'stop')
-        counterClockwise=true
-    }
+    // }else{
+    //     client.stop()
+    //     console.log(listen,'stop')
+    //     counterClockwise=true
+    // }
     })
 })
