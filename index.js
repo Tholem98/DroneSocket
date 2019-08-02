@@ -12,9 +12,7 @@ app.use(express.static(__dirname))
 app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname,'index.html'))
 })
-app.get('/canvas',(req,res)=>{
-    res.sendFile(path.join(__dirname,'canvas.html'))
-})
+
 const server = app.listen(app.get('port'),()=>{
     console.log('Server on port',app.get('port'))
 })
@@ -30,6 +28,8 @@ let left = true
 let clockwise = true
 let counterClockwise= true
 //
+
+
 
 io.on('connection',(socket)=>{
     console.log('listen')
@@ -113,3 +113,11 @@ io.on('connection',(socket)=>{
     // }
     })
 })
+
+require("dronestream").listen(3001);
+
+client.getPngStream()
+    .on('error', console.log)
+    .on('data', function(frame) {
+        socket.emit('image', { image: frame });
+    });
