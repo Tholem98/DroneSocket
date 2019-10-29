@@ -4,7 +4,7 @@ const path= require('path')
 const express = require('express')
 const app = express()
 const socketio= require('socket.io')
-
+require('ffmpeg')
 
 app.set('port',process.env.PORT||3000)
 app.use(express.static(__dirname))
@@ -116,8 +116,8 @@ io.on('connection',(socket)=>{
 
 require("dronestream").listen(3001);
 
-client.getPngStream()
-    .on('error', console.log)
-    .on('data', function(frame) {
-        socket.emit('image', { image: frame });
-    });
+// client.getPngStream()
+//     .on('error', console.log)
+//     .on('data', function(frame) {
+//         socket.emit('image', { image: frame });
+//     });

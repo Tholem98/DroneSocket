@@ -734,6 +734,7 @@ var WebGLCanvas = (function () {
     this.canvas.width = size.w;
     this.canvas.height = size.h;
     
+
     this.onInitWebGL();
     this.onInitShaders();
     initBuffers.call(this);
@@ -1183,6 +1184,7 @@ var FilterWebGLCanvas = (function () {
         canvas.width = width;
         canvas.height = height;
         canvas.style.backgroundColor = "#333333";
+        canvas.id = "handtrack"
         div.appendChild(canvas);
 
         webGLCanvas = new YUVWebGLCanvas(canvas, new Size(width, height));

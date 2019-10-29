@@ -31,209 +31,59 @@
           left:50px; top: 70px" id="myCanvas" >
 
         </canvas>
-         <div id="placeholder" style="float: right"></div>
+         <div id="placeholder" style="float: right; border:1px solid black;
+         border-radius:10px;
+         padding:10px; margin-top: 3em">
         </div>
+        </div>
+        <input type="file" id="image" onchange="app.loadPicture()"></br>
+
+         <canvas width="500" height="500" style="border: black solid 1px;
+          left:50px; top: 70px" id="hand" ></canvas> 
     </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/handtrackjs/dist/handtrack.min.js"></script>  --> -->
     <script src="/nodecopter-client.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="/face-api.min.js"></script>
+     <script src="/socket.io/socket.io.js"></script>
+
+    <script src="/controlCanvas.js"></script>
+    <script src="/controlButton.js"></script>
 
     <script>
-    const canvas = document.getElementById('myCanvas')
-    const ctx = canvas.getContext("2d")
-    let press=false
-    
-    
-    
-    canvas.addEventListener('mousedown',()=>{press=true})
-        
-    canvas.addEventListener('mousemove',(e)=>{
-        if(press){
-            canvas.style.cursor= 'none'
-        //console.log('x:',e.layerX)
-        //console.log('y:',e.layerY)
-        function getMousePos(canvas,e){
-        return{
-            x: e.offsetX,
-            y: e.offsetY
+        function startArDRoneStream() {
+            new NodecopterStream(document.getElementById("placeholder"), {port: 3001});
         }
-    }
-        circle = canvas.getContext("2d")
-        circle.beginPath()
-        circle.lineCap = "round";
-        ctx.moveTo(250,0)
-        ctx.lineTo(250,500)
+        startArDRoneStream();
+        //FaceApi y jsFeat para trabajar con el analisis de imagenes en tiempo real
+        /*const video = document.getElementById("handtrack")
+        const track = faceapi.createCanvasFromMedia(video)
+        document.body.append(track)
+        const displaySize = {width: video.width, height: video.height}
+        faceapi.matchDimensions(track,displaySize)
+        setInterval(async()=>{
+            const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+            console.log(detections)
+            const resizedDetections = faceapi.resizeResults(detections, displaySize)
+            track.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+            faceapi.draw.drawDetections(canvas, resizedDetections)
+            faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
+            faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
+            }, 100)
 
-        circle.stroke()
-       
-        let mousePos = getMousePos(canvas,e)
-        console.log(mousePos)
-        circle.lineWidth = 5
-        circle.clearRect(0,0,500,500)
-        circle.beginPath()
-        circle.fillStyle = "rgba(0,208,0,0.10)"
-        circle.arc(mousePos.x,mousePos.y,35,0,Math.PI*2)
-        circle.fill()
-        circle.beginPath()
-        circle.arc(mousePos.x,mousePos.y,15,0,Math.PI*2)
-        circle.fillStyle = "rgba(0,208,0,0.4)"
-        circle.fill()
-        //Optimizar el movimiento, añadir giros
-            if(mousePos.x>350){
-                todo('right')
-            }else if(mousePos.x<150){
-                todo('left')
-            }else if(mousePos.y>350){
-                todo('back')
-            }else if(mousePos.y<150){
-                todo('front')
-            }else{
-                todo('stop')
-            }
-        }
-    })
-    
-    canvas.addEventListener('mouseup',()=>{
-        press=false
-        todo('stop')    
-    })
-    
+            console.log('end')
+*/
+            //Le tengo que pasar un canvas de contexto 2D
+//             handTtrack.load().then(async (model) => {
+//         // detect objects in the image.
+//     const droneVideo = document.getElementById('handtrack')
+//     const predictions = await model.detect(droneVideo)
+//     const data = await predictions.json()
+//     console.log(data)
+//     model.renderPredictions(predictions, document.getElementById('hand'),document.getElementById('hand').getContext('2d') , droneVideo)
+//   });
 
     </script>
-
-    <script>
-        let onland=true
-        
-        function todo(action){
-            console.log(action)
-            socket.emit(action)
-        }
-
-        window.addEventListener("keydown", function (event) {
-  switch (event.key) {
-    case "Down": // IE/Edge specific value
-    todo('back')
-    case "ArrowDown":
-    todo('back')
-      break;
-    case "Up": // IE/Edge specific value
-    todo('front')
-    case "ArrowUp":
-    todo('front')
-      break;
-    case "Left": // IE/Edge specific value
-    todo('left')
-    case "ArrowLeft":
-    todo('left')
-      break;
-    case "Right": // IE/Edge specific value
-    todo('right')
-    case "ArrowRight":
-    todo('right')
-      break;
-    case "q":
-    todo('clockwise')
-    break
-    case "e":
-    todo('counterClockwise')
-    break
-    case "Enter":
-        if(onland){
-            
-    todo('takeoff')
-    onland=false
-}else{
-    todo('land')
-    onland=true
-}
-      break;
-    case "Esc": // IE/Edge specific value
-    todo('land')
-    case "Escape":
-    
-    todo('land')
-      break;
-    default:
-      return; // Quit when this doesn't handle the key event.
-  }
-        })
-
-window.addEventListener("keyup", (event)=>{
-    let includeKeys=["Escape","Enter"]
-    if(!includeKeys.includes(event.key)){
-    socket.emit('stop')
-    }
-})
-
-
-
-    let socket=io()
-    function takeoff(){
-        todo('takeoff')
-    }
-    function land(){
-        todo('land')
-    }
-    function stop(){
-        todo('stop')
-    }
-    function front(){
-        todo('front')
-    }
-    function back(){
-        todo('back')
-    }
-    function right(){
-        todo('right')
-    }
-    function left(){
-        todo('left')
-    }
-    function clockwise(){
-        todo('clockwise')
-    }
-    function counterClockwise(){
-        todo('counterClockwise')
-    }
-    
-
-    document.getElementById('front').onclick= front
-    document.getElementById('back').onclick= back
-    document.getElementById('right').onclick= right
-    document.getElementById('left').onclick= left
-    document.getElementById('takeoff').onclick = takeoff
-    document.getElementById('land').onclick= land
-    document.getElementById('stop').onclick= stop
-    document.getElementById('clockwise').onclick= clockwise
-    document.getElementById('counterClockwise').onclick= counterClockwise
-
-
-
-            function startArDRoneStream() {
-                new NodecopterStream(document.getElementById("placeholder"), {port: 3001});
-            }
-            function startCameraFeed() {
-                navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-                var constraints = {audio: false, video: true};
-                var video = document.querySelector("video");
-                function successCallback(stream) {
-                    window.stream = stream; // stream available to console
-                    if (window.URL) {
-                        video.src = window.URL.createObjectURL(stream);
-                    } else {
-                        video.src = stream;
-                    }
-                    video.play();
-                }
-                function errorCallback(error){
-                    console.log("navigator.getUserMedia error: ", error);
-                }
-                navigator.getUserMedia(constraints, successCallback, errorCallback);
-            }
-
-
-            startArDRoneStream();
-            startCameraFeed();
-    </script>
+    <script src="/lbp.js"></script> <!--Adaptar adecuadamente el algoritmo para aplicarlo a mi drone-->
 
 </body>
 </html>
