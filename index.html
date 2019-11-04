@@ -40,14 +40,37 @@
 
          <canvas width="500" height="500" style="border: black solid 1px;
           left:50px; top: 70px" id="hand" ></canvas> 
+
+          <div class="wrapper">
+    <div class="container">
+      <canvas id="camera"></canvas>
+      <canvas id="capturedImage"></canvas>
+    </div>
+    <div class="control">
+      <div id="webCam" class="button play"><i class="fa fa-play fa-2x"></i></div>
+      <div id="capture" class="button capture"><i class="fa fa-camera fa-2x"></i></div>
+    </div>
+    <label class="name">
+      <input type="text" placeholder="Your name" autofocus="autofocus" />
+    </label>
+  </div>
     </div>
     <!-- <script src="https://cdn.jsdelivr.net/npm/handtrackjs/dist/handtrack.min.js"></script>  --> -->
     <script src="/nodecopter-client.js"></script>
     <script src="/face-api.min.js"></script>
      <script src="/socket.io/socket.io.js"></script>
 
-    <script src="/controlCanvas.js"></script>
-    <script src="/controlButton.js"></script>
+    <script src="/Control/controlCanvas.js"></script>
+    <script src="/Control/controlButton.js"></script>
+    
+    <script src="/LBP/Data.js"></script>
+    <script src="/LBP/FaceMess.js"></script>
+    <script src="/LBP/Histogram.js"></script>
+    <script src="/LBP/ImageProcessor.js"></script>
+    <script src="/LBP/Session.js"></script>
+    <script src="/LBP/Utils.js"></script>
+    <script src="/LBP/WebCam.js"></script>
+
 
     <script>
         function startArDRoneStream() {
