@@ -35,7 +35,7 @@
          border-radius:10px;
          padding:10px; margin-top: 3em">
         </div>
-        </div>
+        </div><!--
         <input type="file" id="image" onchange="app.loadPicture()"></br>
 
          <canvas width="500" height="500" style="border: black solid 1px;
@@ -54,8 +54,10 @@
       <input type="text" placeholder="Your name" autofocus="autofocus" />
     </label>
   </div>
+      -->
+
     </div>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/handtrackjs/dist/handtrack.min.js"></script>  --> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/handtrackjs/dist/handtrack.min.js"></script>  -->
     <script src="/nodecopter-client.js"></script>
     <script src="/face-api.min.js"></script>
      <script src="/socket.io/socket.io.js"></script>
@@ -73,7 +75,7 @@
 
 
     <script>
-
+/*
 FaceMess.createWithImage('camera', 'images/lenna.png');
 
 const faceMess = FaceMess.createById('camera');
@@ -105,7 +107,7 @@ document.getElementById('capture').addEventListener('click', () => {
   }
 });
 
-
+*/
 
         function startArDRoneStream() {
             new NodecopterStream(document.getElementById("placeholder"), {port: 3001});

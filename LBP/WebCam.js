@@ -4,6 +4,7 @@
 
 class WebCam {
   constructor(canvas, capturedCanvas) {
+    this.flip = true
     this.scaleV = 1;
     this.scaleH = -1;
     this.stream = '';
@@ -133,9 +134,10 @@ class WebCam {
     this.context.stroke();
     this.context.closePath();
   }
-
+  
   drawOutput(maxMatch) {
-    if (maxMatch !== undefined) {
+    if (maxMatch !== undefined && this.flip) {
+      this.flip = false
       /*
       this.context.textAlign = 'center';
       this.context.font = 'bold 20pt Calibri';
@@ -144,6 +146,7 @@ class WebCam {
       this.context.fillText(maxMatch.name, this.canvas.width / 2, this.canvas.height / 2 + 20);
     */
    todo('flip')
+   todo('land')
     }
   }
 }

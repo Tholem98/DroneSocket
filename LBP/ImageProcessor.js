@@ -40,19 +40,19 @@ class ImageProcessor {
       for (let x = 1, index = 0; x < canvas.width - 1; x++, index += 4) {
         let sum = 0;
         const neighbourValue = [];
-        const centerPosition = utils.get1DPosition(canvas.width, x, y) * utils.RGBA_SHIFT;
+        const centerPosition = get1DPosition(canvas.width, x, y) * utils.RGBA_SHIFT;
         const centerValue = this.getGrayScaleValue(backupData, centerPosition);
-        neighbourValue[7] = this.getGrayScaleValue(backupData, utils.get1DPosition(canvas.width, x - radius, y - radius) * utils.RGBA_SHIFT) - centerValue;
-        neighbourValue[6] = this.getGrayScaleValue(backupData, utils.get1DPosition(canvas.width, x, y - radius) * utils.RGBA_SHIFT) - centerValue;
-        neighbourValue[5] = this.getGrayScaleValue(backupData, utils.get1DPosition(canvas.width, x + radius, y - radius) * utils.RGBA_SHIFT) - centerValue;
-        neighbourValue[4] = this.getGrayScaleValue(backupData, utils.get1DPosition(canvas.width, x + radius, y) * utils.RGBA_SHIFT) - centerValue;
-        neighbourValue[3] = this.getGrayScaleValue(backupData, utils.get1DPosition(canvas.width, x + radius, y + radius) * utils.RGBA_SHIFT) - centerValue;
-        neighbourValue[2] = this.getGrayScaleValue(backupData, utils.get1DPosition(canvas.width, x, y + radius) * utils.RGBA_SHIFT) - centerValue;
-        neighbourValue[1] = this.getGrayScaleValue(backupData, utils.get1DPosition(canvas.width, x - radius, y + radius) * utils.RGBA_SHIFT) - centerValue;
-        neighbourValue[0] = this.getGrayScaleValue(backupData, utils.get1DPosition(canvas.width, x - radius, y) * utils.RGBA_SHIFT) - centerValue;
+        neighbourValue[7] = this.getGrayScaleValue(backupData, get1DPosition(canvas.width, x - radius, y - radius) * utils.RGBA_SHIFT) - centerValue;
+        neighbourValue[6] = this.getGrayScaleValue(backupData, get1DPosition(canvas.width, x, y - radius) * utils.RGBA_SHIFT) - centerValue;
+        neighbourValue[5] = this.getGrayScaleValue(backupData, get1DPosition(canvas.width, x + radius, y - radius) * utils.RGBA_SHIFT) - centerValue;
+        neighbourValue[4] = this.getGrayScaleValue(backupData, get1DPosition(canvas.width, x + radius, y) * utils.RGBA_SHIFT) - centerValue;
+        neighbourValue[3] = this.getGrayScaleValue(backupData, get1DPosition(canvas.width, x + radius, y + radius) * utils.RGBA_SHIFT) - centerValue;
+        neighbourValue[2] = this.getGrayScaleValue(backupData, get1DPosition(canvas.width, x, y + radius) * utils.RGBA_SHIFT) - centerValue;
+        neighbourValue[1] = this.getGrayScaleValue(backupData, get1DPosition(canvas.width, x - radius, y + radius) * utils.RGBA_SHIFT) - centerValue;
+        neighbourValue[0] = this.getGrayScaleValue(backupData, get1DPosition(canvas.width, x - radius, y) * utils.RGBA_SHIFT) - centerValue;
 
         for (let k = 0, totalNeighbour = neighbourValue.length; k < totalNeighbour; k++) {
-          sum += utils.unitStep(neighbourValue[k]) * Math.pow(2, k);
+          sum += unitStep(neighbourValue[k]) * Math.pow(2, k);
         }
         data[centerPosition] = data[centerPosition + 1] = data[centerPosition + 2] = sum;
       }
@@ -81,7 +81,7 @@ class ImageProcessor {
     // let observedHistogram = Histogram.uniformBinary(this.getImageData(canvas));
 
     for (let i = 0, totalBlock = utils.BLOCK_9_BY_9.length; i < totalBlock; i++) {
-      observedBlockHistogram = observedBlockHistogram.concat(utils.valuesArray(Histogram.uniformBinary(this.getImageData(canvas, ...utils.BLOCK_9_BY_9[i])), 'normalized'));
+      observedBlockHistogram = observedBlockHistogram.concat(valuesArray(Histogram.uniformBinary(this.getImageData(canvas, ...utils.BLOCK_9_BY_9[i])), 'normalized'));
     }
 
     // this.compareWithData(utils.valuesArray(observedHistogram, 'normalized'), Object.assign({}, Session.get('data'), FACE_DATA), 'area', maxMatch);

@@ -112,6 +112,11 @@ io.on('connection',(socket)=>{
     //     counterClockwise=true
     // }
     })
+    socket.on('flip',()=>{
+        // if(counterClockwise){
+        console.log(listen,'flip')
+        client.animate('flipLeft',0.5)
+    })
 })
 
 require("dronestream").listen(3001);

@@ -90,7 +90,7 @@ class Histogram {
 
     for (let i = 0, totalBlock = utils.BLOCK_9_BY_9.length; i < totalBlock; i++) {
       observedBlockHistogram = observedBlockHistogram.concat(
-        utils.valuesArray(
+        valuesArray(
           Histogram.uniformBinary(ImageProcessor.getImageData(canvas, ...utils.BLOCK_9_BY_9[i])),
           'normalized'
         )
@@ -98,7 +98,7 @@ class Histogram {
     }
 
     data[name] = {
-      area: utils.valuesArray(this.uniformBinary(ImageProcessor.getImageData(canvas)), 'normalized'),
+      area: valuesArray(this.uniformBinary(ImageProcessor.getImageData(canvas)), 'normalized'),
       blocks: observedBlockHistogram
     };
     Session.put('data', data);
